@@ -2,7 +2,7 @@
 
 """
 
-from article import article
+from document import document
 
 
 class Analyzer:
@@ -95,7 +95,7 @@ def Validate_Article_List (article_list):
     is_valid = True
     if article_list:
         for a in article_list:
-            if not isinstance (a, article.Article):
+            if not isinstance (a, document.Document):
                 is_valid = False
 
     return is_valid

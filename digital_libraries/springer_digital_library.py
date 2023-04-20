@@ -6,7 +6,7 @@ Documentation: https://dev.springernature.com/adding-constraints
 
 import requests
 import json
-from article import article
+from document import document
 
 
 class Springer_Digital_Library:
@@ -14,6 +14,7 @@ class Springer_Digital_Library:
     apy_key            = ''
     json_articles_list = []
     articles_list      = []
+    search_string      = None
 
     def __init__ (self, path_to_config):
         #  Load the API key
@@ -23,15 +24,18 @@ class Springer_Digital_Library:
         self.api_key  = conf ["springer_apikey"]
 
 
-    def search_references (self, query_string):
+    def search_references (self, search_string):
         """
         Search for the query string provided through the IEEE online digital library
-        :param query_string: string
+        :param search_string: string
         """
+
+        self.search_string = search_string
+        query_string = Convert_to_String (search_string)
 
         #  Compute and search for the input query
         base_url     = "http://api.springernature.com/meta/v2/json"
-        query_text   = "?q=%22" + query_string + "%22"
+        query_text   = "?p=100&q=" + query_string # "?p=100&q=%22" + query_string + "%22"
         and_op       = "&"
         api_label    = "api_key="
         query        = base_url + query_text + and_op + api_label + self.api_key
@@ -63,6 +67,24 @@ class Springer_Digital_Library:
         self.articles_list = result
 
 
+def Convert_to_String (search_string):
+    """
+    :param search_string: Search_String
+    :return: search_query: string
+    """
+
+    #  Produce a general search query
+    search_query = search_string.To_String ()
+
+    #  Further elaboration is required
+    # search_query = search_query. \
+        # replace (" ", "%20"). \
+        # replace ("(", "%28"). \
+        # replace (")", "%29")
+
+    return search_query
+
+
 def Convert_to_Article (dict_article):
     """
     :param dict_article:
@@ -87,14 +109,17 @@ def Convert_to_Article (dict_article):
     year, month, day = Acquire_Year_Month_Day (pub_date)
 
     #  Process the most complex results
-    author   = [creator ["creator"] for creator in creators]
+    if creators != [""]:
+        author = [c ["creator"] for c in creators]
+    else:
+        author = ""
     author   = ' and '.join (author)
     keywords = ", ".join (keywords)
     pages    = start_page + "-" + end_page
 
     #  Allocate a new object to group all the
     #  parameters of a reference
-    ref = article.Article \
+    ref = document.Document \
         (identifier,
          content_type,
          author,

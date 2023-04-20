@@ -6,7 +6,7 @@ Not any API available
 import json
 import requests
 import re
-from article import article
+from document import document
 
 
 class ACM_Digital_library:
@@ -14,7 +14,7 @@ class ACM_Digital_library:
     list_of_doi        = []
     json_articles_list = []
     articles_list      = []
-
+    search_string      = None
 
     def acquire_list_of_doi (self, url):
         """
@@ -69,11 +69,14 @@ class ACM_Digital_library:
         self.list_of_doi = list_of_doi
 
 
-    def search_references (self, query_string):
+    def search_references (self, search_string):
         """
         Search for the query string provided through the IEEE online digital library
-        :param query_string: string
+        :param search_string: Search_String
         """
+
+        self.search_string = search_string
+        query_string = Convert_to_String (search_string)
 
         #  Compute the URL
         base_url     = "https://dl.acm.org/action/doSearch?AllField="
@@ -111,6 +114,21 @@ class ACM_Digital_library:
 
         #  Store the result in the correct attribute
         self.articles_list = result
+
+
+def Convert_to_String (search_string):
+    """
+    :param search_string: Search_String
+    :return: search_query: string
+    """
+
+    #  Produce a general search query
+    search_query = search_string.To_String ()
+
+    #  Further elaboration is required
+    search_query = search_query.replace (" ", "+")
+
+    return search_query
 
 
 def Get_Data_From_Doi (doi):
@@ -172,7 +190,10 @@ def Get_Data_From_Doi (doi):
         abs_list = re.findall(pattern, article_page, flags=re.DOTALL)
 
     #  Convert to a string and clean the output
-    abstract = abs_list [0]
+    if len (abs_list) > 0:
+        abstract = abs_list [0]
+    else:
+        abstract = ""
     abstract = abstract \
         .replace("<i>", "") \
         .replace("</i>", "") \
@@ -239,7 +260,7 @@ def Convert_to_Article (dict_article):
 
     #  Allocate a new object to group all the
     #  parameters of a reference
-    ref = article.Article \
+    ref = document.Document \
         (identifier,
          content_type,
          " and ".join (authors),

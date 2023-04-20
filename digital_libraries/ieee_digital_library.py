@@ -5,7 +5,7 @@ API example: https://ieeexploreapi.ieee.org/api/v1/search/articles?querytext=(cl
 
 import requests
 import json
-from article import article
+from document import document
 
 
 class IEEE_Digital_Library:
@@ -13,6 +13,7 @@ class IEEE_Digital_Library:
     apy_key            = ''
     json_articles_list = []
     articles_list      = []
+    search_string      = None
     #  path_to_config = 'digital_libraries/api_config.json'
 
     def __init__ (self, path_to_config):
@@ -23,11 +24,14 @@ class IEEE_Digital_Library:
         self.api_key  = conf ["ieee_apikey"]
 
 
-    def search_references (self, query_string):
+    def search_references (self, search_string):
         """
         Search for the query string provided through the IEEE online digital library
-        :param query_string: string
+        :param search_string: string
         """
+
+        self.search_string = search_string
+        query_string = Convert_to_String (search_string)
 
         #  Compute and search for the input query
         base_url     = "https://ieeexploreapi.ieee.org/api/v1/search/articles?"
@@ -63,6 +67,18 @@ class IEEE_Digital_Library:
         self.articles_list = result
 
 
+def Convert_to_String (search_string):
+    """
+    :param search_string: Search_String
+    :return: search_query: string
+    """
+
+    #  Produce a general search query
+    search_query = search_string.To_String ()
+
+    #  No further elaboration is required
+    return search_query
+
 
 def Convert_to_Article (dict_article):
     """
@@ -94,7 +110,7 @@ def Convert_to_Article (dict_article):
 
     #  Allocate a new object to group all the
     #  parameters of a reference
-    ref = article.Article \
+    ref = document.Document \
         (article_number,
          content_type,
          Process_Authors (author),

@@ -34,7 +34,8 @@ bibtex_tag = {
 }
 
 
-class Article:
+class Document:
+    """
     article_number = ""
     content_type   = ""
     fields = {
@@ -51,6 +52,7 @@ class Article:
     fields_name [10]  : "",  # "keywords"
     fields_name [11]  : ""   #  "issn"
     }
+    """
 
     def __init__ (self,
                  article_number,
@@ -68,6 +70,20 @@ class Article:
                  keywords   = "",
                  issn = ""):
 
+        self.fields = {
+            fields_name [0]   : "",  # "author"
+            fields_name [1]   : "",  # "title"
+            fields_name [2]   : "",  # "abstract"
+            fields_name [3]   : "",  # "doi"
+            fields_name [4]   : "",  # "book_title"
+            fields_name [5]   : "",  # "year"
+            fields_name [6]   : "",  # "month"
+            fields_name [7]   : "",  # "volume"
+            fields_name [8]   : "",  # "number"
+            fields_name [9]   : "",  # "pages"
+            fields_name [10]  : "",  # "keywords"
+            fields_name [11]  : ""   #  "issn"
+            }
         self.article_number  = article_number
         self.content_type    = content_type
         self.fields [fields_name [0]]  = author

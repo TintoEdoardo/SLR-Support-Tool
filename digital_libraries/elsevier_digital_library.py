@@ -5,7 +5,7 @@ API example: # https://api.elsevier.com/content/search/scopus?query=KEY%28cloud%
 
 import json
 import requests
-from article import article
+from document import document
 
 
 class Elsevier_Digital_Library:
@@ -13,21 +13,25 @@ class Elsevier_Digital_Library:
     apy_key            = ''
     json_articles_list = []
     articles_list      = []
+    search_string      = None
     #  path_to_config = 'digital_libraries/api_config.json'
 
     def __init__ (self, path_to_config):
         #  Load the API key
         con_file = open (path_to_config)
-        conf     = json.load(con_file)
+        conf     = json.load (con_file)
         con_file.close()
         self.api_key  = conf ["elsevier_apikey"]
 
 
-    def search_references (self, query_string):
+    def search_references (self, search_string):
         """
         Search for the query string provided through the IEEE online digital library
-        :param query_string: string
+        :param search_string: string
         """
+
+        self.search_string = search_string
+        query_string = Convert_to_String (search_string)
 
         #  Compute and search for the input query
         base_url      = "https://api.elsevier.com/content/search/scopus"
@@ -94,6 +98,24 @@ class Elsevier_Digital_Library:
         self.articles_list = result
 
 
+def Convert_to_String (search_string):
+    """
+    :param search_string: Search_String
+    :return: search_query: string
+    """
+
+    #  Produce a general search query
+    search_query = search_string.To_String ()
+
+    #  Further elaboration is required
+    search_query = search_query.\
+        replace (" ", "+"). \
+        replace ("(", "%28"). \
+        replace (")", "%29")
+
+    return search_query
+
+
 def Convert_to_Article (dict_article):
     """
     :param dict_article:
@@ -130,7 +152,7 @@ def Convert_to_Article (dict_article):
 
     #  Allocate a new object to group all the
     #  parameters of a reference
-    ref = article.Article \
+    ref = document.Document \
         (identifier,
          content_type,
          author,
