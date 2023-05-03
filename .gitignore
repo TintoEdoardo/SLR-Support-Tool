@@ -130,3 +130,6 @@ dmypy.json
 
 # API Key file
 digital_libraries/api_config.json
+
+# Test file
+test/test_file/

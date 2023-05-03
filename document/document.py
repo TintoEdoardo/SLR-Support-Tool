@@ -82,7 +82,7 @@ class Document:
             fields_name [8]   : "",  # "number"
             fields_name [9]   : "",  # "pages"
             fields_name [10]  : "",  # "keywords"
-            fields_name [11]  : ""   #  "issn"
+            fields_name [11]  : ""   # "issn"
             }
         self.article_number  = article_number
         self.content_type    = content_type

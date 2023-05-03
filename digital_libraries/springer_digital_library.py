@@ -34,18 +34,31 @@ class Springer_Digital_Library:
         query_string = Convert_to_String (search_string)
 
         #  Compute and search for the input query
-        base_url     = "http://api.springernature.com/meta/v2/json"
-        query_text   = "?p=100&q=" + query_string # "?p=100&q=%22" + query_string + "%22"
-        and_op       = "&"
-        api_label    = "api_key="
-        query        = base_url + query_text + and_op + api_label + self.api_key
-        query_result = requests.get (query)
+        base_url     = "http://api.springernature.com/meta/v2/json?"
+        start        = 1
 
-        #  Select and return only the 'articles' field
-        articles = json.loads (query_result.text)
+        #  Use pagination to iterate over all the results
+        records_is_empty = False
+        while not records_is_empty:
+            query_text   = "s=" + str (start) + "&p=25&q=" + query_string # "?p=100&q=%22" + query_string + "%22"
+            and_op       = "&"
+            api_label    = "api_key="
+            query        = base_url + query_text + and_op + api_label + self.api_key
 
-        self.json_articles_list = articles ["records"]
+            print (query)
 
+            query_result = requests.get (query)
+
+            #  Acquire the results
+            articles = json.loads (query_result.text)
+
+            records = articles ["records"]
+
+            if not records:
+                records_is_empty = True
+            else:
+                self.json_articles_list.extend (records)
+                start += 25
 
     def convert_to_articles (self):
         """
