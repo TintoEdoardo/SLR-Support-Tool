@@ -7,8 +7,6 @@ from document import document
 
 class Analyzer:
 
-    article_list = []
-
     def __init__ (self, article_list):
 
         #  Validate the input list

@@ -71,4 +71,7 @@ class Content_Screener:
             #  Finally divide the score on the number of pages
             score = score / number_of_pages
 
-            article.update ({'note' : score})
+            if "note" in article:
+                article ["note"] = score
+            else:
+                article.update ({'note' : score})
