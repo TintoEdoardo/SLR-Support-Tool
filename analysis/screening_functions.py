@@ -38,10 +38,17 @@ class Content_Screener:
 
             #  Search for the PDF corresponding to the article
             title    = article ["title"] [:30]
+            title    = title.replace (":", "")
+            title    = title.replace ("?", "")
+            title    = title.replace ("*", "")
+            title    = title.replace ("/", "")
             pdf_name = None
             for name in pdf_name_list:
                 if name.find (title) != -1:
                     pdf_name = name
+
+            if pdf_name is None:
+                print (title)
 
             #  Read the PDF file
             path_to_pdf = os.path.join (self.path_to_pdfs, pdf_name)
@@ -69,9 +76,15 @@ class Content_Screener:
             number_of_pages = len (reader.pages)
 
             #  Finally divide the score on the number of pages
-            score = score / number_of_pages
+            score     = score / number_of_pages
+            score_str = "{0:.3f}".format (score)
 
             if "note" in article:
-                article ["note"] = score
+                article ["note"] = score_str
             else:
-                article.update ({'note' : score})
+                article.update ({'note' : score_str})
+
+    def save_result_in_file (self, path_to_file):
+        file = open (path_to_file, 'w')
+        json.dump (self.article_list, file, indent=4)
+        file.close ()
