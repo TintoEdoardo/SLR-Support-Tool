@@ -23,6 +23,10 @@ if __name__ == '__main__':
 
     path_to_bibliography = "bibliography/bibliography.json"
     path_to_pdfs         = "bibliography/PDFs"
+    path_to_result_file  = "bibliography/sorted_bibliography.json"
+
+    Screener = sf.Content_Screener (path_to_pdfs, path_to_bibliography)
+    Screener.read_article_from_bibliography ()
 
     relevance_keys = [
         #  Continuum Edge/Cloud/Compute/Computing/Computation
@@ -38,6 +42,8 @@ if __name__ == '__main__':
         {'key': 'continuumofcomputing',     'weight': '1', 'loc': 'full_body'},
         {'key': 'continuum of computation', 'weight': '1', 'loc': 'full_body'},
         {'key': 'continuumofcomputation',   'weight': '1', 'loc': 'full_body'},
+        {'key': 'osmotic computing',        'weight': '1', 'loc': 'full_body'},
+        {'key': 'osmoticcomputing',        'weight': '1', 'loc': 'full_body'},
 
         #  Orchestration
         {'key': 'orchestration', 'weight': '0.5', 'loc': 'full_body'},
@@ -66,6 +72,9 @@ if __name__ == '__main__':
         {'key': 'systematicliteraturereview',   'weight': '-1000', 'loc': 'title'},
         {'key': 'survey',                       'weight': '-1000', 'loc': 'title'}
     ]
+
+    Screener.assign_relevance (relevance_keys)
+    Screener.save_result_in_file (path_to_result_file)
 
     """
     IEEE = digital_libraries.ieee_digital_library.IEEE_Digital_Library ('digital_libraries/api_config.json')
