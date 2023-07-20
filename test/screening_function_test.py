@@ -20,7 +20,7 @@ class MyTestCase (unittest.TestCase):
     ]
 
     def test_read_article_from_bibliography (self):
-        Screener = analysis.screening_functions.Content_Screener (self.path_to_pdfs, self.path_to_bibliography)
+        Screener = analysis.screening_functions.Content_Screener (self.path_to_bibliography, self.path_to_pdfs)
 
         Screener.read_article_from_bibliography ()
 
@@ -28,7 +28,7 @@ class MyTestCase (unittest.TestCase):
 
 
     def test_assign_relevance (self):
-        Screener = analysis.screening_functions.Content_Screener(self.path_to_pdfs, self.path_to_bibliography)
+        Screener = analysis.screening_functions.Content_Screener(self.path_to_bibliography, self.path_to_pdfs)
         Screener.read_article_from_bibliography ()
 
         Screener.assign_relevance (self.relevance_keys)
