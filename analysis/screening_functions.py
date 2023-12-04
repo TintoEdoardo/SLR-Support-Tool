@@ -163,9 +163,11 @@ class Content_Screener:
 
         title_eval_list = []
         for article in self.article_list:
+            if not "title" in article:
+                continue
             title_eval_list.append ({"title"      : article ["title"],
                                      "evaluation" : article ["note"]})
-        sorted_title_eval_list = sorted (title_eval_list, key= lambda a : a ["evaluation"], reverse=True)
+        sorted_title_eval_list = sorted (title_eval_list, key= lambda a : float (a ["evaluation"]), reverse=True)
 
         file = open (destination + name + '_title_eval.json', 'w')
         file.writelines (json.dumps (sorted_title_eval_list, indent=2))

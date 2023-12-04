@@ -23,6 +23,19 @@ class Springer_Digital_Library:
         con_file.close()
         self.api_key  = conf ["springer_apikey"]
 
+        self.to_date_year  = None
+        self.to_date_month = None
+        self.to_date_day   = None
+
+
+    def set_to_date (self, year=None, month=None, day=None):
+        if year is not None:
+            self.to_date_year = year
+        if month is not None:
+            self.to_date_month = month
+        if day is not None:
+            self.to_date_day = day
+
 
     def search_references (self, search_string):
         """
@@ -45,7 +58,8 @@ class Springer_Digital_Library:
             api_label    = "api_key="
             query        = base_url + query_text + and_op + api_label + self.api_key
 
-            print (query)
+            #  DEBUG
+            # print (query)
 
             query_result = requests.get (query)
 
@@ -72,6 +86,19 @@ class Springer_Digital_Library:
         for art in self.json_articles_list:
             #  Parse the input dictionary into ad Article
             ref = Convert_to_Article (art)
+
+            #  Check if the article has been published
+            #  before to_date, if so skip to the next
+            if self.to_date_year is not None:
+                if float (ref.fields ["year"]) >  self.to_date_year:
+                    continue
+                if float (ref.fields ["year"]) == self.to_date_year:
+                    if self.to_date_month is not None:
+                        if ref.fields ["month"] is not '':
+                            month = Convert_Month_Name_to_Number (ref.fields ["month"])
+                            if month > self.to_date_month:
+                                print (month)
+                                continue
 
             #  Add the article into the result list
             result.append (ref)
@@ -174,30 +201,73 @@ def Acquire_if_Any (keys, dictionary):
             return [""]
 
 
+def Convert_Month_Name_to_Number (name):
+    """
+    :param name: str
+    :return: number: str
+    """
+    number = None
+    if name == 'January':
+        number = 1
+    elif name == 'February':
+        number = 2
+    elif name == 'March':
+        number = 3
+    elif name == 'April':
+        number = 4
+    elif name == 'May':
+        number = 5
+    elif name == 'June':
+        number = 6
+    elif name == 'July':
+        number = 7
+    elif name == 'August':
+        number = 8
+    elif name == 'September':
+        number = 9
+    elif name == 'October':
+        number = 10
+    elif name == 'November':
+        number = 11
+    elif name == 'December':
+        number = 12
+    return number
+
+def Convert_Month_Number_to_Name (number):
+    """
+    :param number: str
+    :return: name: str
+    """
+    name = ''
+    months = [
+        {'name': 'January',   'number': '1'},
+        {'name': 'February',  'number': '2'},
+        {'name': 'March',     'number': '3'},
+        {'name': 'April',     'number': '4'},
+        {'name': 'May',       'number': '5'},
+        {'name': 'June',      'number': '6'},
+        {'name': 'July',      'number': '7'},
+        {'name': 'August',    'number': '8'},
+        {'name': 'September', 'number': '9'},
+        {'name': 'October',   'number': '10'},
+        {'name': 'November',  'number': '11'},
+        {'name': 'December',  'number': '12'}
+    ]
+
+    for m in months:
+        if number == m ['number']:
+            name = m ['name']
+
+    return name
+
+
 def Acquire_Year_Month_Day (publication_date):
     """
     :param publication_date: str
     :return: month: str
     """
-    months = [
-        {'name' : 'January',   'number' : '1'},
-        {'name' : 'February',  'number' : '2'},
-        {'name' : 'March',     'number' : '3'},
-        {'name' : 'April',     'number' : '4'},
-        {'name' : 'May',       'number' : '5'},
-        {'name' : 'June',      'number' : '6'},
-        {'name' : 'July',      'number' : '7'},
-        {'name' : 'August',    'number' : '8'},
-        {'name' : 'September', 'number' : '9'},
-        {'name' : 'October',   'number' : '10'},
-        {'name' : 'November',  'number' : '11'},
-        {'name' : 'December',  'number' : '12'}
-    ]
 
     year, day, month = publication_date.split ('-')
-
-    for m in months:
-        if month == m ['number']:
-            month = m ['name']
+    month = Convert_Month_Number_to_Name (month)
 
     return year, month, day
