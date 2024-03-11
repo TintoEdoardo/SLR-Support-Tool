@@ -1,5 +1,5 @@
 """
-
+Screening functions
 """
 
 import json
@@ -131,13 +131,11 @@ class Content_Screener:
                         target = article ['title']
                     else:
                         target = ""
-                        score  = -1000
                 elif key ['loc'] == 'abstract':
                     if "abstract" in article:
                         target = article ['abstract']
                     else:
                         target = ""
-                        score  = -1000
                 else:
                     if "title" in article and "abstract" in article:
                         target = article ['title'] + article ['abstract']
