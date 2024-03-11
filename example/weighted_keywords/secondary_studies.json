@@ -1,0 +1,122 @@
+[
+  {
+    "key": "edge continuum",
+    "weight": "1",
+    "loc": "title"
+  },
+  {
+    "key": "cloud continuum",
+    "weight": "1",
+    "loc": "title"
+  },
+  {
+    "key": "compute continuum",
+    "weight": "1",
+    "loc": "title"
+  },
+  {
+    "key": "computing continuum",
+    "weight": "1",
+    "loc": "title"
+  },
+  {
+    "key": "continuum of computing",
+    "weight": "1",
+    "loc": "title"
+  },
+  {
+    "key": "continuum of computation",
+    "weight": "1",
+    "loc": "title"
+  },
+  {
+    "key": "osmotic computing",
+    "weight": "1",
+    "loc": "title"
+  },
+  {
+    "key": "orchestration",
+    "weight": "0.5",
+    "loc": "abstract"
+  },
+  {
+    "key": "orchestrator",
+    "weight": "0.5",
+    "loc": "abstract"
+  },
+  {
+    "key": "choreography",
+    "weight": "0.5",
+    "loc": "abstract"
+  },
+  {
+    "key": "real-time",
+    "weight": "0.3",
+    "loc": "abstract"
+  },
+  {
+    "key": "realtime",
+    "weight": "0.3",
+    "loc": "abstract"
+  },
+  {
+    "key": "experiment",
+    "weight": "0.3",
+    "loc": "abstract"
+  },
+  {
+    "key": "experiments",
+    "weight": "0.3",
+    "loc": "abstract"
+  },
+  {
+    "key": "experimental",
+    "weight": "0.5",
+    "loc": "abstract"
+  },
+  {
+    "key": "empirical",
+    "weight": "0.5",
+    "loc": "abstract"
+  },
+  {
+    "key": "slr",
+    "weight": "10",
+    "loc": "title"
+  },
+  {
+    "key": "systematic review",
+    "weight": "10",
+    "loc": "title"
+  },
+  {
+    "key": "systematic literature review",
+    "weight": "10",
+    "loc": "title"
+  },
+  {
+    "key": "survey",
+    "weight": "10",
+    "loc": "title"
+  },
+  {
+    "key": "slr",
+    "weight": "6",
+    "loc": "abstract"
+  },
+  {
+    "key": "systematic review",
+    "weight": "6",
+    "loc": "abstract"
+  },
+  {
+    "key": "systematic literature review",
+    "weight": "6",
+    "loc": "abstract"
+  },
+  {
+    "key": "survey",
+    "weight": "6",
+    "loc": "abstract"
+  }
+]

@@ -1,0 +1,177 @@
+[
+  {
+    "key": "continuum",
+    "weight": "1",
+    "loc": "title"
+  },
+  {
+    "key": "continuum",
+    "weight": "0.7",
+    "loc": "abstract"
+  },
+  {
+    "key": "edge continuum",
+    "weight": "1",
+    "loc": "full_body"
+  },
+  {
+    "key": "edgecontinuum",
+    "weight": "1",
+    "loc": "full_body"
+  },
+  {
+    "key": "cloud continuum",
+    "weight": "1",
+    "loc": "full_body"
+  },
+  {
+    "key": "cloudcontinuum",
+    "weight": "1",
+    "loc": "full_body"
+  },
+  {
+    "key": "compute continuum",
+    "weight": "1",
+    "loc": "full_body"
+  },
+  {
+    "key": "computecontinuum",
+    "weight": "1",
+    "loc": "full_body"
+  },
+  {
+    "key": "computing continuum",
+    "weight": "1",
+    "loc": "full_body"
+  },
+  {
+    "key": "computingcontinuum",
+    "weight": "1",
+    "loc": "full_body"
+  },
+  {
+    "key": "continuum of computing",
+    "weight": "1",
+    "loc": "full_body"
+  },
+  {
+    "key": "continuumofcomputing",
+    "weight": "1",
+    "loc": "full_body"
+  },
+  {
+    "key": "continuum of computation",
+    "weight": "1",
+    "loc": "full_body"
+  },
+  {
+    "key": "continuumofcomputation",
+    "weight": "1",
+    "loc": "full_body"
+  },
+  {
+    "key": "osmotic computing",
+    "weight": "1",
+    "loc": "full_body"
+  },
+  {
+    "key": "osmoticcomputing",
+    "weight": "1",
+    "loc": "full_body"
+  },
+  {
+    "key": "architecture",
+    "weight": "0.5",
+    "loc": "full_body"
+  },
+  {
+    "key": "model",
+    "weight": "0.4",
+    "loc": "full_body"
+  },
+  {
+    "key": "orchestration",
+    "weight": "0.4",
+    "loc": "full_body"
+  },
+  {
+    "key": "orchestrator",
+    "weight": "0.6",
+    "loc": "full_body"
+  },
+  {
+    "key": "choreography",
+    "weight": "0.5",
+    "loc": "full_body"
+  },
+  {
+    "key": "real-time",
+    "weight": "0.3",
+    "loc": "full_body"
+  },
+  {
+    "key": "realtime",
+    "weight": "0.3",
+    "loc": "full_body"
+  },
+  {
+    "key": "predictable",
+    "weight": "0.5",
+    "loc": "full_body"
+  },
+  {
+    "key": "predictability",
+    "weight": "0.5",
+    "loc": "full_body"
+  },
+  {
+    "key": "experiment",
+    "weight": "0.3",
+    "loc": "full_body"
+  },
+  {
+    "key": "experiments",
+    "weight": "0.3",
+    "loc": "full_body"
+  },
+  {
+    "key": "experimental",
+    "weight": "0.5",
+    "loc": "full_body"
+  },
+  {
+    "key": "empirical",
+    "weight": "0.5",
+    "loc": "full_body"
+  },
+  {
+    "key": "slr",
+    "weight": "-1000",
+    "loc": "title"
+  },
+  {
+    "key": "systematic review",
+    "weight": "-1000",
+    "loc": "title"
+  },
+  {
+    "key": "systematicreview",
+    "weight": "-1000",
+    "loc": "title"
+  },
+  {
+    "key": "systematic literature review",
+    "weight": "-1000",
+    "loc": "title"
+  },
+  {
+    "key": "systematicliteraturereview",
+    "weight": "-1000",
+    "loc": "title"
+  },
+  {
+    "key": "survey",
+    "weight": "-1000",
+    "loc": "title"
+  }
+]
